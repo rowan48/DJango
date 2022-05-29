@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+{% block content %}
+
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+{#data=:{{ my_todos}}#}
+<a href="/todo/add/"><button type="submit" class="btn btn-primary">ADD</button></a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Todo</th>
+      <th scope="col">Done</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for my_todo in my_todos %}
+    <tr>
+{#    {% for todo in my_todo %}#}
+      <th scope="row">{{my_todo.id}}</th>
+          <td>{{my_todo.name}}</td>
+      <td>{{ my_todo.is_done }}</td>
+      <td>
+          {% buttons %}
+              <a href="/todo/home/{{ my_todo.id }}"><button type="submit" class="btn btn-primary">Details</button></a>
+              <a href="/todo/home/done/{{ my_todo.id }}"><button type="submit" class="btn btn-success">Done</button></a>
+              <a href="/todo/home/delete/{{ my_todo.id }}"><button type="submit" class="btn btn-danger">Delete</button></a>
+              <a href="/todo/home/edit/{{ my_todo.id }}"><button type="submit" class="btn btn-secondary">Update</button></a>
+          {% endbuttons %}
+      </td>
+    </tr>
+{#  {% endfor %}#}
+  {% endfor %}
+
+  </tbody>
+</table>
+
+{# Read the documentation for more information #}
+{% endblock %}
+{% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update task</title>
+</head>
+<body>
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<form action="http://127.0.0.1:8080/todo/addtask" method="post" >
+    {% csrf_token %}
+    {{ my_todo.id }}
+  <div class="form-group">
+    <label for="exampleInputEmail1">ID</label>
+    <input name="id" type="text" class="form-control" id="exampleInputEmail1" >
+
+  </div>
+      <div class="form-group">
+    <label for="exampleInputEmail1">Todo Name</label>
+    <input name="name" type="text" class="form-control" id="exampleInputEmail1" >
+
+  </div>
+               <a href="/todo/addtask"><button type="submit" class="btn btn-primary">add</button></a>
+
+</form>
+
+</body>
+</html>
