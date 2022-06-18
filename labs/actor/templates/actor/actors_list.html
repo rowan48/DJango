@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+{% block body_content%}
+<a class="btn btn-success" href="{% url 'actor:create'%}"> Create Actor</a>
+
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <td>Actor Name</td>
+        <td>Actor Gender</td>
+        <td>Actor Age</td>
+        <td>Actor Nationality</td>
+        <td>Actions Nationality</td>
+    </tr>
+    </thead>
+    <tbody>{% for actor in actors %}
+
+
+    <tr>
+        <td> {{actor}}</td>
+        <td>
+            {{actor.gender}}
+        </td>
+        <td>
+            {{actor.age}}
+        </td>
+        <td>
+            {{actor.nationality}}
+        </td>
+
+        <td>
+            <a href="{% url 'actor:update' actor.id%}" class="btn btn-primary"> Update</a>
+            <a href="{% url 'actor:delete' actor.id %}" class="btn btn-primary">Delete </a>
+            <a href="{% url 'actor:detail' actor.id%}"  class="btn btn-primary"> Details</a>
+        </td >
+    </tr>
+
+    {% endfor %}
+
+
+    </tbody>
+</table>
+
+
+{%endblock%}

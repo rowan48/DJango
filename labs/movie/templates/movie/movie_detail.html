@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% block body_content %}
+
+<div class="card">
+    <img height="50%" width="50%" src="{{request.scheme}}://{{request.get_host}}{{movie.thumbnail.url}}">
+    <h1> {{movie.name}}</h1>
+
+    <p>{{request.scheme}}://{{request.get_host}}{{movie.thumbnail.url}}</p>
+</div>
+
+
+{% endblock %}

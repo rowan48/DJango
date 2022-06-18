@@ -18,7 +18,6 @@ def todo_home(request):
     context = {'my_todos': my_todos}
     return render(request, 'todo.html', context)
 
-
 def get_todo(request,**kwargs):
     print("get_todo")
     value = kwargs.get("id")

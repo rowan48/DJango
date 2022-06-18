@@ -1,0 +1,66 @@
+{% extends 'todo/base.html' %}
+
+{% block content%}
+
+<!--{% for todo1,value in collection.items %}-->
+
+<!--{{todo1}} : {{value}}  : <a href="{% url 'todo:todo-detail' todo1%}">Details</a>-->
+
+<!--{% endfor %}-->
+<form method="post" action="/todo/add">
+     {% csrf_token %}
+ <div class="w-25">
+    <label  class="visually-hidden">Password</label>
+    <input type="text" class="form-control" name="author" placeholder="Author" required><br>
+  </div>
+  <div class="w-25">
+    <label  class="visually-hidden">Password</label>
+    <input type="number" class="form-control" name="pages"  placeholder="Pages" required>
+  </div>
+<br>
+  <div class="col-auto">
+
+  <button class="btn btn-success" type="submit"> Add</button>
+  </div>
+</form>
+<br>
+{% if warning_msg%}
+<div class="alert alert-danger">{{warning_msg}}</div>
+{% endif %}
+
+{% if msg22 %}
+<div class="alert alert-success">{{msg22}}</div>
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Author</th>
+      <th scope="col">Pages</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for todoID,value in collection.items %}
+    <tr>
+      <th scope="row">{{todoID}}</th>
+      <td>{{value.Author}}</td>
+      <td>{{value.pages}}</td>
+      <td>{{value.status}}</td>
+      <td> <a class="btn btn-success " href="{% url 'todo:todo-detail' todoID%}">Details</a><a class="btn btn-info mx-2" href="{% url 'todo:todo-state' todoID%}">State</a><a class="btn btn-danger" href="{% url 'todo:todo-delete' todoID%}">Delete</a><a class="btn btn-primary mx-2" href="{% url 'todo:todo-update' todoID%}">Update</a></td>
+    </tr>
+   {% endfor %}
+
+  </tbody>
+</table>
+
+
+{%endblock%}
