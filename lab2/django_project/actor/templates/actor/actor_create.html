@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Actor create</h1>
+<form action="{% url 'actor:create'%}" method="POST">
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit">Create</button>
+
+</form>
+
+
+{% endblock %}
